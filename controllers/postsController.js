@@ -2,12 +2,13 @@ const postsData = require("../data/posts");
 
 //index
 const index = (req, res) => {
-    res.send('Lista dei post')
+    res.json(postsData)
 }
 
 //show
 const show = (req, res) => {
-    res.send(`Dettagli del post: ${req.params.id}`)
+    const post = postsData.find((elm) => elm.id == req.params.id);
+    res.json(post)
 }
 
 //create
@@ -27,7 +28,19 @@ const modify = (req, res) => {
 
 //delete
 const destroy = (req, res) => {
-    res.send(`Eliminazione del post: ${req.params.id}`)
+    const post = postsData.find((elm) => elm.id == req.params.id);
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Post not found"
+        });
+    }
+
+    postsData.splice(postsData.indexOf(post), 1);
+    console.log("Post aggiornati:", postsData);
+
+    res.sendStatus(204);
+    
 }
 
 
