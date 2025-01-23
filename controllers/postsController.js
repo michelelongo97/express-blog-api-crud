@@ -13,6 +13,7 @@ const show = (req, res) => {
 
 //create
 const create = (req, res) => {
+    console.log(req.body);
     res.send('Creazione del post')
 }
 
