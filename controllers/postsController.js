@@ -13,8 +13,16 @@ const show = (req, res) => {
 
 //create
 const create = (req, res) => {
-    console.log(req.body);
-    res.send('Creazione del post')
+    const newId = postsData[postsData.length - 1].id + 1
+    const newPost = {
+        id: newId,
+        name: req.body.name,
+        tags: req.body.tags 
+    }
+
+    postsData.push(newPost);
+
+    res.sendStatus(201);
 }
 
 //update
