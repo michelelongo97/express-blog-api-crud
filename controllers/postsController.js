@@ -27,7 +27,18 @@ const create = (req, res) => {
 
 //update
 const update = (req, res) => {
-    res.send(`Modifica completa del post: ${req.params.id}`)
+    const post = postsData.find((elm) => elm.id == req.params.id);
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Post not found"
+        });
+    }
+
+    post.name = req.body.name;
+    post.tags = req.body.tags;
+
+    res.json(post);
 }
 
 //modify
