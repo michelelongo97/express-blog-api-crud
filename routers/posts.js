@@ -1,5 +1,6 @@
 const express = require("express")
 
+const validationParamId = require("../middlewares/validationParamId");
 const postController = require("../controllers/postsController");
 
 const router = express.Router()
@@ -8,18 +9,18 @@ const router = express.Router()
 router.get('/', postController.index);
 
 // show
-router.get('/:id', postController.show);
+router.get('/:id', validationParamId, postController.show);
 
 // create
 router.post('/', postController.create);
 
 // update
-router.put('/:id', postController.update)
+router.put('/:id', validationParamId, postController.update)
 
 //modify
-router.patch('/:id', postController.modify)
+router.patch('/:id', validationParamId, postController.modify)
 
 //delete
-router.delete('/:id', postController.destroy)
+router.delete('/:id', validationParamId, postController.destroy)
 
 module.exports = router;
