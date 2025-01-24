@@ -8,6 +8,14 @@ const index = (req, res) => {
 //show
 const show = (req, res) => {
     const post = postsData.find((elm) => elm.id == req.params.id);
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Not Found",
+            message: "Post non trovato",
+        });
+    }
+    
     res.json(post)
 }
 
